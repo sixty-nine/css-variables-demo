@@ -1,0 +1,95 @@
+<!--
+
+	CSS variables demo.
+
+
+	This code is available here:
+
+		https://github.com/sixty-nine/css-variables-demo
+
+
+	More information than you ever wanted to know about CSS variables can be found here:
+
+		https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_variables
+
+-->
+<html>
+<head>
+<style>
+
+	:root {
+	/* Variables defined on the :root style are cascaded to all the elements */
+	  --red-foreground: red;
+	}
+
+	.my-red-div {
+		/* Variables defined on a specific element only cascade to that element's children */
+		--font-size: 48px;
+
+		font-size: var(--font-size);
+		color: var(--red-foreground);
+	}
+
+</style>
+</head>
+<body>
+	<div class="my-red-div">
+
+	</div>
+
+	<button onclick="onClickGetColor()">What color is it?</button>
+	<button onclick="onClickRed()">Red</button>
+	<button onclick="onClickGreen()">Green</button>
+	<button onclick="onClickBlue()">Blue</button>
+	<br/><br/>
+	<button onclick="onClickDoNotClick()">Don't click me</button>
+
+	<script type="text/javascript">
+	(function () {
+
+		var body = document.getElementsByTagName('body')[0],
+			element = document.getElementsByClassName('my-red-div')[0],
+			varName = '--red-foreground';
+
+		/** Display the --red-foreground variable value */
+		document.onClickGetColor = function () {
+			var color = getComputedStyle(element).getPropertyValue(varName);
+			alert('The color is ' + color);
+		};
+
+		/** Change the color to red */
+		document.onClickRed = function () {
+			body.style.setProperty(varName, 'red');
+			element.innerHTML = 'This div is red';
+		};
+
+		/** Change the color to green */
+		document.onClickGreen = function () {
+			body.style.setProperty(varName, 'green');
+			element.innerHTML = 'This div is green';
+		};
+
+		/** Change the color to blue */
+		document.onClickBlue = function () {
+			body.style.setProperty(varName, 'blue');
+			element.innerHTML = 'This div is blue';
+		};
+
+		/** Get css variables values from different places */
+		document.onClickDoNotClick = function () {
+			console.log('--red-foreground is defined on the root style, so it can be read from everywhere')
+			console.log('get "--red-foreground" variable on body:', getComputedStyle(body).getPropertyValue('--red-foreground'));
+			console.log('get "--red-foreground" variable on element:', getComputedStyle(element).getPropertyValue('--red-foreground'));
+			console.log(' ');
+			console.log('--font-size is defined on the DIV style, and thus cannot be read from the BODY')
+			console.log('get "--font-size" variable on body:', getComputedStyle(body).getPropertyValue('--font-size'));
+			console.log('get "--font-size" variable on element:', getComputedStyle(element).getPropertyValue('--font-size'));
+
+		}
+
+		document.onClickRed();
+
+	}());
+	</script>
+</body>
+</html>
