@@ -33,9 +33,7 @@
 </style>
 </head>
 <body>
-	<div class="my-red-div">
-
-	</div>
+	<div class="my-red-div"></div>
 
 	<button onclick="onClickGetColor()">What color is it?</button>
 	<button onclick="onClickRed()">Red</button>
@@ -84,8 +82,7 @@
 			console.log('--font-size is defined on the DIV style, and thus cannot be read from the BODY')
 			console.log('get "--font-size" variable on body:', getComputedStyle(body).getPropertyValue('--font-size'));
 			console.log('get "--font-size" variable on element:', getComputedStyle(element).getPropertyValue('--font-size'));
-
-		}
+		};
 
 		document.onClickRed();
 
